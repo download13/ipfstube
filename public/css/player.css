@@ -1,0 +1,12 @@
+#player__holder {
+	text-align: center;
+}
+
+#player__holder > p {
+	margin: 200px;
+}
+
+#player {
+	width: 100%;
+	max-width: 900px;
+}

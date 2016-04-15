@@ -1,0 +1,12 @@
+#uploader {
+	max-width: 600px;
+	border: 2px dashed #0087F7;
+	border-radius: 5px;
+	background: white;
+	padding: 50px;
+	margin: 200px auto 100px auto;
+	text-align: center;
+	cursor: pointer;
+	font-size: 24px;
+	color: #888;
+}

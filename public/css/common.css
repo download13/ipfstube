@@ -1,0 +1,51 @@
+html, body {
+	margin: 0;
+	padding: 0;
+
+	font-family: Arial, sans-serif;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+
+#sitemain {
+	flex: 1;
+}
+
+#sitefooter {
+	font-size: 12px;
+	background-color: #ddd;
+	color: #888;
+	text-align: center;
+	padding: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+
+#hashnav {
+	display: flex;
+	max-width: 600px;
+	margin: 30px auto 100px auto;
+}
+
+#hashnav__input {
+	flex: 1 1 auto;
+	border-radius: 3px 0 0 3px;
+	border: 2px solid #888;
+	font-size: 19px;
+	padding: 4px 6px;
+}
+
+#hashnav__btn {
+	flex: 0 0 auto;
+	border-radius: 0 3px 3px 0;
+	background-color: #888;
+	color: #efefef;
+	border: 0;
+	font-size: 22px;
+}

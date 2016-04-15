@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+	<title>IPFSTube Player</title>
+	<link rel="stylesheet" href="/css/common.css" />
+	<link rel="stylesheet" href="/css/player.css" />
+	<script src="/js/cash.min.js"></script>
+</head>
+<body>
+	<main id="sitemain">
+		<div id="hashnav">
+			<input id="hashnav__input" placeholder="Video Hash" />
+			<button id="hashnav__btn">Watch</button>
+		</div>
+		<div id="player__holder">
+			<video id="player" controls>
+				<p>Your browser does not support playing video. Update your browser to watch this video.</p>
+			</video>
+		</div>
+	</main>
+	<footer id="sitefooter">
+		<span><a href="/">Home</a></span>
+		<span>Plays videos stored in <a href="https://ipfs.io/">IPFS</a></span>
+	</footer>
+	<script src="/js/player.js"></script>
+</body>
