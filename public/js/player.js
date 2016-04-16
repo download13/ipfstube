@@ -1,23 +1,4 @@
 (function() {
-	var input = $('#hashnav__input');
-	var btn = $('#hashnav__btn');
-
-	input.on('keyup', function(e) {
-		if(e.keyCode === 13) {
-			navigateFilehash();
-		}
-	});
-	btn.on('click', navigateFilehash);
-
-	function navigateFilehash() {
-		var hash = input.val();
-		if(hash) {
-			location.assign(hash);
-		}
-	}
-})();
-
-(function() {
 	var hash = location.pathname.split('/').pop();
 	// hash = 'QmU1GSqu4w29Pt7EEM57Lhte8Lce6e7kuhRHo6rSNb2UaC';
 	var playerHolder = $('#player__holder');
