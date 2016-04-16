@@ -4,9 +4,14 @@
 	border-radius: 5px;
 	background: white;
 	padding: 50px;
-	margin: 200px auto 100px auto;
+	margin: 100px auto 100px auto;
 	text-align: center;
 	cursor: pointer;
 	font-size: 24px;
 	color: #888;
+}
+
+#sitedescription {
+	text-align: center;
+	font-size: 22px;
 }

@@ -11,6 +11,13 @@ body {
 	flex-direction: column;
 }
 
+code {
+	background-color: rgba(150, 150, 150, 0.4);
+	border-radius: 3px;
+	padding: 3px;
+	font-family: monospace;
+}
+
 
 #sitemain {
 	flex: 1;
