@@ -12,7 +12,7 @@ services:
         build: .
         restart: always
         volumes:
-            - /etc/letsencrypt/live:/etc/nginx/certs
+            - /etc/letsencrypt:/etc/letsencrypt:ro
             - /tmp/letsencrypt-auto:/tmp/letsencrypt-auto
         ports:
             - "80:80"
