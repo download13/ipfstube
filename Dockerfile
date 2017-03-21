@@ -1,4 +1,4 @@
-FROM nginx:alpine:3.4
+FROM nginx:1.10.3-alpine
 
 RUN mkdir /etc/nginx/certs
 COPY nginx.conf /etc/nginx/nginx.conf
