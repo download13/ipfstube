@@ -2,7 +2,7 @@ version: "2"
 
 services:
     ipfsnode:
-        image: ipfs/go-ipfs:v0.4.2
+        image: ipfs/go-ipfs:v0.4.9
         restart: always
         volumes:
             - ~/volumes/ipfs:/data/ipfs
