@@ -20,7 +20,8 @@ console.log(subs)
 		'http://127.0.0.1:8080', // User's own IPFS daemon
 		'', // Us
 		'https://gateway.ipfs.io', // Official gateway
-		'https://ipfs.pics' // Is this rude?
+		'https://ipfs.pics', // Is this rude?
+		'http://gw.ipfs.video'
 	];
 	var urls = sources.map(function(prefix) {
 		return prefix + hashToPath(hash);
