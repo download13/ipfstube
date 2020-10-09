@@ -1,0 +1,29 @@
+{
+  "name": "ipfstube",
+  "version": "1.0.0",
+  "description": "Watch videos stored on IPFS",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/download13/ipfstube.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/download13/ipfstube/issues"
+  },
+  "homepage": "https://github.com/download13/ipfstube#readme",
+  "devDependencies": {
+    "@cycle/dom": "^22.8.0",
+    "@cycle/run": "^5.5.0",
+    "@types/ipfs": "file:../../../Desktop/types-ipfs",
+    "dropzone": "^5.7.2",
+    "ipfs": "^0.50.2",
+    "typescript": "^4.0.3"
+  }
+}
