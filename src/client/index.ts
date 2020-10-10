@@ -1,32 +1,18 @@
 import run from '@cycle/run'
-import { MainDOMSource, VNode, makeDOMDriver } from '@cycle/dom'
-import { HistoryInput, Location, makeHistoryDriver, captureClicks } from '@cycle/history'
-import xs, { Stream } from 'xstream'
+import { makeDOMDriver } from '@cycle/dom'
+import { makeHistoryDriver, captureClicks } from '@cycle/history'
 import { App } from './components'
+import {  makeIPFSDriver } from './drivers/ipfs'
 
-type Sources = {
-	DOM: MainDOMSource
-	history: Stream<Location>
+async function main() {
+	run(App, {
+		DOM: makeDOMDriver(document.body),
+		history: captureClicks(makeHistoryDriver()),
+		IPFS: await makeIPFSDriver('ipfstube')
+	})
 }
 
-type Sinks = {
-	DOM: Stream<VNode>
-	history: Stream<HistoryInput>
-}
-
-function main({ DOM, history }: Sources): Sinks {
-	const { DOM: vtree$ } = App({ DOM, history })
-
-	return {
-		DOM: vtree$,
-		history: xs.of()
-	}
-}
-
-run(main, {
-	DOM: makeDOMDriver(document.body),
-	history: captureClicks(makeHistoryDriver())
-})
+main()
 
 //import createDropzone from 'dropzone'
 /*

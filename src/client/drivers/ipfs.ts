@@ -36,6 +36,11 @@ type CatResponse = {
 
 type IPFSDriver = ($: Stream<IPFSRequest>) => MainIPFSSource
 
+export type MainIPFSSource = {
+	select: (category: string) => Stream<IPFSEvent>
+	events: Stream<IPFSEvent>
+}
+
 export async function makeIPFSDriver(repo: string): Promise<IPFSDriver> {
 	const ipfs = await IPFS.create({ repo })
 
@@ -92,9 +97,4 @@ async function collectBuffer(bufferIter: AsyncIterable<Buffer>) {
 
 function isIPFSEvent(a: IPFSEvent | undefined): a is IPFSEvent {
 	return a !== undefined
-}
-
-type MainIPFSSource = {
-	select: (category: string) => Stream<IPFSEvent>
-	events: Stream<IPFSEvent>
 }
