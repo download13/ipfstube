@@ -1,13 +1,6 @@
 version: "2"
 
 services:
-    ipfsnode:
-        image: ipfs/go-ipfs:v0.4.12-rc2
-        restart: always
-        volumes:
-            - ~/volumes/ipfs:/data/ipfs
-        ports:
-            - "4001:4001"
     frontend:
         build: .
         restart: always
