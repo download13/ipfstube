@@ -5,6 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "watch": "cross-env PARCEL_WORKERS=1 parcel watch --dist-dir dist/client src/client/index.html",
+    "build": "parcel build --dist-dir dist/client src/client/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +25,7 @@
     "@cycle/history": "^7.4.0",
     "@cycle/run": "^5.5.0",
     "@types/ipfs": "file:../../../Desktop/types-ipfs",
+    "cross-env": "^7.0.2",
     "dropzone": "^5.7.2",
     "ipfs": "^0.50.2",
     "parcel": "^2.0.0-beta.1",
