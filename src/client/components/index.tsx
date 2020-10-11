@@ -21,8 +21,14 @@ type Sinks = {
 	IPFS: Stream<IPFSRequest>
 }
 
-export function App({ history, IPFS }: Sources): Sinks {
-	const event$ = IPFS.select('watch')
+export function App({ DOM, history, IPFS }: Sources): Sinks {
+	const mediaBlob$ = IPFS.select('watch')
+		.map(e => {
+			if(e.kind === 'catRes') {
+				return e.content
+			}
+		})
+		.filter(isBlob)
 
 	const pageTree$ = history
 		.map(loc => {
@@ -58,4 +64,8 @@ export function App({ history, IPFS }: Sources): Sinks {
 
 function isString(a: unknown): a is string {
 	return typeof a === 'string'
+}
+
+function isBlob(a: unknown): a is Blob {
+	return a instanceof Blob
 }

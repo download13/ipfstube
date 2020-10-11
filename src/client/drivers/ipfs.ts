@@ -31,7 +31,7 @@ type AddResponse = {
 
 type CatResponse = {
 	kind: 'catRes'
-	content: Uint8Array
+	content: Blob
 }
 
 type IPFSDriver = ($: Stream<IPFSRequest>) => MainIPFSSource
@@ -56,11 +56,11 @@ export async function makeIPFSDriver(repo: string): Promise<IPFSDriver> {
 						path: file.cid
 					}
 				} else if(req.kind === 'cat') {
-					const buffer = await collectBuffer(ipfs.cat(req.path))
-					console.log('cat res len', buffer.length)
+					const buffers = await collectBuffers(ipfs.cat(req.path))
+					console.log('cat res', buffers)
 					return {
 						kind: 'catRes',
-						content: buffer
+						content: new Blob(buffers)
 					}
 				} else if(req.kind === 'pin') {
 					if(req.pin) {
@@ -88,11 +88,15 @@ export async function makeIPFSDriver(repo: string): Promise<IPFSDriver> {
 }
 
 async function collectBuffer(bufferIter: AsyncIterable<Buffer>) {
+	return Buffer.concat(await collectBuffers(bufferIter))
+}
+
+async function collectBuffers(bufferIter: AsyncIterable<Buffer>): Promise<Buffer[]> {
 	const a = []
 	for await (const b of bufferIter) {
 		a.push(b)
 	}
-	return Buffer.concat(a)
+	return a
 }
 
 function isIPFSEvent(a: IPFSEvent | undefined): a is IPFSEvent {
