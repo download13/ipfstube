@@ -3,12 +3,14 @@ import { makeDOMDriver } from '@cycle/dom'
 import { makeHistoryDriver, captureClicks } from '@cycle/history'
 import { App } from './components'
 import {  makeIPFSDriver } from './drivers/ipfs'
+import {  makeVideoDriver } from './drivers/media'
 
 async function main() {
 	run(App, {
 		DOM: makeDOMDriver(document.body),
 		history: captureClicks(makeHistoryDriver()),
-		IPFS: await makeIPFSDriver('ipfstube')
+		IPFS: await makeIPFSDriver('ipfstube'),
+		player: makeVideoDriver()
 	})
 }
 

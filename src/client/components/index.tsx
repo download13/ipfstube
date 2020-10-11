@@ -2,6 +2,7 @@ import type { MainDOMSource, VNode } from '@cycle/dom'
 import type { Stream } from 'xstream'
 import type { HistoryInput, Location } from '@cycle/history'
 import type { IPFSRequest, MainIPFSSource } from '../drivers/ipfs'
+import type { VideoInput } from '../drivers/media'
 
 import Snabbdom from 'snabbdom-pragma'
 import xs from 'xstream'
@@ -13,23 +14,17 @@ type Sources = {
 	DOM: MainDOMSource
 	history: Stream<Location>
 	IPFS: MainIPFSSource
+	player: Stream<VNode>
 }
 
 type Sinks = {
 	DOM: Stream<VNode>
 	history: Stream<HistoryInput>
 	IPFS: Stream<IPFSRequest>
+	player: Stream<VideoInput>
 }
 
 export function App({ DOM, history, IPFS }: Sources): Sinks {
-	const mediaBlob$ = IPFS.select('watch')
-		.map(e => {
-			if(e.kind === 'catRes') {
-				return e.content
-			}
-		})
-		.filter(isBlob)
-
 	const pageTree$ = history
 		.map(loc => {
 			if(loc.pathname === '/') {
@@ -48,6 +43,14 @@ export function App({ DOM, history, IPFS }: Sources): Sinks {
 	return {
 		DOM: layoutTree$,
 		history: xs.of(),
+		player: IPFS.select('watch')
+			.map(e => {
+				if(e.kind === 'catRes') {
+					return e.content
+				}
+			})
+			.filter(isBlob)
+			.map(blob => ({ srcObject: blob }) as VideoInput),
 		IPFS: history
 			.map(({ pathname }) => {
 				const [ match ]  = pathname.matchAll(/^\/v\/(.+)$/)
