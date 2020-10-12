@@ -2,8 +2,8 @@ import run from '@cycle/run'
 import { makeDOMDriver } from '@cycle/dom'
 import { makeHistoryDriver, captureClicks } from '@cycle/history'
 import { App } from './components'
-import {  makeIPFSDriver } from './drivers/ipfs'
-import {  makeVideoDriver } from './drivers/media'
+import { makeIPFSDriver } from './drivers/ipfs'
+import { makeVideoDriver } from './drivers/media'
 
 async function main() {
 	run(App, {

@@ -9,6 +9,7 @@ import xs from 'xstream'
 import { Layout } from './Layout'
 import { Uploader } from './Uploader'
 import { Player } from './Player'
+import { locationToRoute } from './Router'
 
 type Sources = {
 	DOM: MainDOMSource
@@ -24,20 +25,21 @@ type Sinks = {
 	player: Stream<VideoInput>
 }
 
-export function App({ DOM, history, IPFS }: Sources): Sinks {
-	const pageTree$ = history
-		.map(loc => {
-			if(loc.pathname === '/') {
+export function App({ DOM, history, IPFS, player }: Sources): Sinks {
+	const route$ = history.map(locationToRoute)
+
+	const pageTree$ = xs.combine(route$, player)
+		.map(([ route, videoEl ]) => {
+			switch(route.kind) {
+			case 'root':
 				return <Uploader />
-			} else if(loc.pathname.startsWith('/v/')) {
-				const [, cid] = loc.pathname.matchAll(/^\/v\/(.+)$/)
-				return <Player path={cid} />
-			} else {
-				// TODO: Redirect to home
+			case 'video':
+				return <Player>{videoEl}</Player>
+			case 'notfound':
 				return <span>404</span>
 			}
 		})
-	
+
 	const { DOM: layoutTree$ } = Layout({ children$: pageTree$ })
 
 	return {

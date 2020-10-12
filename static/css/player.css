@@ -2,11 +2,11 @@
 	text-align: center;
 }
 
-#player__holder > p {
+#player__holder p {
 	margin: 200px;
 }
 
-#player {
+#player__holder video {
 	width: 100%;
 	max-width: 900px;
 }

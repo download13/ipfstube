@@ -1,11 +1,14 @@
+import { VNode } from '@cycle/dom'
 import Snabbdom from 'snabbdom-pragma'
 
-export function Player() {
+type Props = {
+	children?: VNode
+}
+
+export function Player({ children }: Props) {
 	return (
 		<div id="player__holder">
-			<video id="player" controls crossorigin="anonymous">
-				<p>Your browser does not support playing video. Update your browser to watch this video.</p>
-			</video>
+			{children}
 		</div>
 	)
 }
