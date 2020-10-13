@@ -21,9 +21,14 @@ code {
 
 #sitemain {
 	flex: 1;
+	margin-bottom: 40px;
 }
 
 #sitefooter {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 	font-size: 12px;
 	background-color: #ddd;
 	color: #888;

@@ -13,7 +13,7 @@ type Sinks = {
 export function Layout({ children$ }: Sources): Sinks {
 	return {
 		DOM: children$.map(ch =>
-			<main>
+			<main id="sitename">
 				<div id="hashnav">
 					<input id="hashnav__input" placeholder="Video Hash" />
 					<button id="hashnav__btn">Watch</button>

@@ -9,7 +9,7 @@ import xs from 'xstream'
 import { Layout } from './Layout'
 import { Uploader } from './Uploader'
 import { Player } from './Player'
-import { locationToRoute } from './Router'
+import { locationToRoute, isRouteVideo } from './Router'
 
 type Sources = {
 	DOM: MainDOMSource
@@ -53,16 +53,10 @@ export function App({ DOM, history, IPFS, player }: Sources): Sinks {
 			})
 			.filter(isBlob)
 			.map(blob => ({ srcObject: blob }) as VideoInput),
-		IPFS: history
-			.map(({ pathname }) => {
-				const [ match ]  = pathname.matchAll(/^\/v\/(.+)$/)
-				if(match) {
-					return match[1]
-				}
-			})
-			.filter(isString)
-			.map(path => {
-				return { kind: 'cat', path, category: 'watch' } as IPFSRequest
+		IPFS: route$
+			.filter(isRouteVideo)
+			.map(({ id }) => {
+				return { kind: 'cat', path: id, category: 'watch' } as IPFSRequest
 			})
 	}
 }

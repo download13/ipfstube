@@ -19,9 +19,14 @@ export function locationToRoute(loc: Location): Route {
 	if(loc.pathname === '/') {
 		return { kind: 'root' }
 	} else if(loc.pathname.startsWith('/v/')) {
-		const [ [, cid] ]= loc.pathname.matchAll(/^\/v\/(.+)$/)
-		return { kind: 'video', id: cid }
-	} else {
-		return { kind: 'notfound' }
+		const m = loc.pathname.match(/^\/v\/(.+)$/)
+		if(m && m[1])
+		return { kind: 'video', id: m[1] }
 	}
+
+	return { kind: 'notfound' }
+}
+
+export function isRouteVideo(route: Route): route is Video {
+	return route.kind === 'video'
 }
