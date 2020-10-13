@@ -1,12 +1,14 @@
-version: "2"
+version: "3.2"
 
 services:
-    frontend:
-        build: .
-        restart: always
-        volumes:
-            - /etc/letsencrypt:/etc/letsencrypt:ro
-            - /tmp/letsencrypt-auto:/tmp/letsencrypt-auto
-        ports:
-            - "80:80"
-            - "443:443"
+  ipfstube:
+    build: .
+    restart: always
+    networks:
+      webserver:
+        aliases:
+          - ipfstube
+
+networks:
+  webserver:
+    external: true
