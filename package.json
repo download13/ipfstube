@@ -9,8 +9,7 @@
     "watch:client": "webpack --watch",
     "serve": "nodemon dist/server/index.js",
     "watch:server": "tsc -p src/server --watch",
-    "build": "webpack --mode=production && tsc -p src/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode=production && tsc -p src/server"
   },
   "repository": {
     "type": "git",
