@@ -40,12 +40,11 @@ const babelRule = {
 module.exports = {
   mode: 'development',
   target: 'web',
-  devtool: 'eval-cheap-source-map',
+  //devtool: 'eval-cheap-source-map',
 
   entry: {
     client: './src/client/index.ts'
   },
-
   output: {
     path: path.resolve('./dist/client')
   },
