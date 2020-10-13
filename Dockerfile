@@ -1,5 +1,15 @@
-FROM nginx:1.10.3-alpine
+FROM node:14.3.0 AS build
+WORKDIR /app
+COPY package*.json webpack.config.cjs ./
+RUN npm install
+COPY src ./src
+COPY static ./static
+ARG NODE_ENV=production
+RUN npm run build
+RUN npm prune
 
-RUN mkdir /etc/nginx/certs
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY public/ /etc/nginx/public/
+FROM node:14.3.0 AS deploy
+WORKDIR /app
+COPY --from=build /app ./
+ENV NODE_ENV production
+CMD ["node", "dist/server/index.js"]
