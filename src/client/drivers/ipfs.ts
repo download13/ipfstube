@@ -53,14 +53,15 @@ export async function makeIPFSDriver(repo: string): Promise<IPFSDriver> {
 					const file = await ipfs.add(req.data)
 					return {
 						kind: 'addRes',
-						path: file.cid
+						path: file.cid,
+						category: req.category
 					}
 				} else if(req.kind === 'cat') {
 					const buffers = await collectBuffers(ipfs.cat(req.path))
-					console.log('cat res', buffers)
 					return {
 						kind: 'catRes',
-						content: new Blob(buffers)
+						content: new Blob(buffers),
+						category: req.category
 					}
 				} else if(req.kind === 'pin') {
 					if(req.pin) {
