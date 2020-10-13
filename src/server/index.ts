@@ -18,11 +18,7 @@ async function main() {
 		ctx.body = 'Not Found'
 	})
 	
-	app.listen(80)
+	app.listen(80, () => console.log('Listening at http://localhost/'))
 }
 
 main()
-
-async function sendApp(ctx) {
-	await send(ctx, )
-}
