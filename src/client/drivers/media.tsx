@@ -5,25 +5,36 @@ export type VideoInput = {
 	volume?: number
 	position?: number
 	srcObject?: Blob
+	src?: string
 }
 
 export function makeVideoDriver(className: string = 'driven_video') {
 	function videoDriver(input$: Stream<VideoInput>) {
 		return input$
 			.fold<VideoInput>(
-				(state, input) => ({
-					...input,
-					srcObject: input.srcObject ?? state.srcObject
-				}),
+				(state, input) => {
+					if(state.src) {
+						URL.revokeObjectURL(state.src)
+					}
+
+					if(input.srcObject) {
+						input.src = URL.createObjectURL(input.srcObject)
+					}
+
+					return {
+						...input,
+						src: input.src ?? state.src
+					}
+				},
 				{}
 			)
-			.debug('video inputs')
-			.map(({ volume, position, srcObject }) => (
+			.map(({ volume, position, src }) => (
 				<video
+					controls={true}
 					className={className}
 					volume={volume}
 					currentTime={position}
-					srcObject={srcObject}
+					src={src}
 				/>
 			))
 	}
