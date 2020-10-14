@@ -10,6 +10,7 @@ import { Layout } from './Layout'
 import { Uploader } from './Uploader'
 import { Player } from './Player'
 import { locationToRoute, isRouteVideo } from './Router'
+import { isWatchCID, watchId } from './Input'
 
 type Sources = {
 	DOM: MainDOMSource
@@ -26,7 +27,11 @@ type Sinks = {
 }
 
 export function App({ DOM, history, IPFS, player }: Sources): Sinks {
-	const route$ = history.map(locationToRoute)
+	const watchInputEvent$ = watchId(DOM)
+
+	const route$ = history
+		.debug('history')
+		.map(locationToRoute)
 
 	const pageTree$ = xs.combine(route$, player)
 		.map(([ route, videoEl ]) => {
@@ -44,7 +49,9 @@ export function App({ DOM, history, IPFS, player }: Sources): Sinks {
 
 	return {
 		DOM: layoutTree$,
-		history: xs.of(),
+		history: watchInputEvent$
+			.filter(isWatchCID)
+			.map(({ cid }) => ('/v/' + cid.toString()) as HistoryInput),
 		player: IPFS.select('watch')
 			.map(e => {
 				if(e.kind === 'catRes') {

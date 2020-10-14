@@ -5,7 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin')
 const tsRule = {
   test: /\.(ts|tsx)$/,
   loader: 'ts-loader',
-  //include: [path.resolve(__dirname, 'src')],
   exclude: [/node_modules/]
 }
 
