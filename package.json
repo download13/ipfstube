@@ -28,7 +28,7 @@
     "@cycle/dom": "^22.8.0",
     "@cycle/history": "^7.4.0",
     "@cycle/run": "^5.5.0",
-    "@types/ipfs": "file:../../../Desktop/types-ipfs",
+    "@types/ipfs": "download13/types-ipfs#dee7d1620809682fd11d636760ff03ecb076b731",
     "@types/koa": "^2.11.4",
     "@types/koa-static": "^4.0.1",
     "assert": "^2.0.0",
